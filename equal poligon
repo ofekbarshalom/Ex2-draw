@@ -1,0 +1,29 @@
+@Override
+	public boolean equals(Object p){
+		if(p==null || !(p instanceof Polygon_2D)) {return false;}
+		Polygon_2D p2 = (Polygon_2D) p;
+		Point_2D[] actual = this.getAllPoints();
+		Point_2D[] excepted = p2.getAllPoints();
+		int count=0;
+		int flag = -1;
+		if(actual.length==excepted.length) {
+			for (int i = 0; i < actual.length; i++) {
+				for (int j = 0; j < actual.length; j++) {
+					if (actual[i].equals(excepted[j]))
+						flag = i;
+				}
+			}
+		}
+		if (actual[i].equals(excepted[j])){
+			for (int e = i; e < actual.length; e++) {
+				if (actual[e].equals(excepted[e]))
+					count++;
+			}
+			for (int f = i; f > 0; f--) {
+				if (actual[f].equals(excepted[f]))
+					count++;
+			}
+			return(count==actual.length);
+		}
+		return false;
+	}
