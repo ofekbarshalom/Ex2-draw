@@ -9,17 +9,25 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.File;
 
-/**
- * This class is a simple "interlayer" connecting (aka simplifying) the
- * StdDraw with the Map class.
+/** ReadMe (Ex2 assignment):
+ * The goal of the Ex2 assignment is to complete an interface capable of drawing shape and performing actions on them.
+ * Some of these actions include sorting shapes by certain criteria, remove shapes, saving and loading them from a file,
+ * as well as selecting shapes and performing action on the selected ones.
+ * After completing these actions, we were asked to crate tests for them using JUnit Test class
+ * and checking for their correctness.
  * Written for 101 java course it uses simple static functions to allow a
  * "Singleton-like" implementation.
  *
- * addReadMe
- *
- *
- *
  * @author boaz.ben-moshe + ofek bar-shalom (ID: 324161421)
+ */
+
+
+/** Ex2 Class:
+ * This class is a simple "interlayer" connecting (aka simplifying) the
+ * StdDraw with the Map class.
+ * Ex2 is a function that setup drew window environment, it can handel mouse movement and clicks
+ * and operate accordingly.
+ * by handling this clicks it can change the mode of operation.
  */
 public class Ex2 implements Ex2_GUI {
     private GUI_Shape_Collection _shapes = new ShapeCollection();

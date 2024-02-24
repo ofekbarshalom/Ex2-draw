@@ -2,6 +2,7 @@ package ex2.test;
 
 import ex2.ex2.Ex2_Const;
 import ex2.geo.Rect_2D;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ex2.geo.Point_2D;
@@ -11,11 +12,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Triangle_2DTest {
 
-    Point_2D p1 = new Point_2D(1,5);
-    Point_2D p2 = new Point_2D(1,3);
-    Point_2D p3 = new Point_2D(5,3);
-    Triangle_2D t1=new Triangle_2D(p1,p2,p3);
-    Point_2D[] allPoints =t1.getAllPoints();
+    Point_2D p1, p2, p3;
+    Triangle_2D t1;
+    Point_2D[] allPoints;
+
+    @BeforeEach // set triangle for tests before each test
+    void set(){
+        p1 = new Point_2D(1,5);
+        p2 = new Point_2D(1,3);
+        p3 = new Point_2D(5,3);
+        t1=new Triangle_2D(p1,p2,p3);
+        allPoints =t1.getAllPoints();
+    }
 
     @Test
     void getAllPoints() {
@@ -80,22 +88,18 @@ class Triangle_2DTest {
     @Test
     void scale() {
         Point_2D center = new Point_2D(1,3);
-        Triangle_2D originT1=(Triangle_2D) t1.copy();
-
-        t1.scale(center,2);                 // Scaled the Triangle by 2;
-        assertEquals(allPoints[0].x(),1.0,"p1 X should be 3.0");
-        assertEquals(allPoints[0].y(),7.0,"p1 Y should be 8.0");
-        assertEquals(allPoints[1].x(),1.0,"p2 X should be 3.0");
-        assertEquals(allPoints[1].y(),3.0,"p2 Y should be 6.0");
-        assertEquals(allPoints[2].x(),9.0,"p3 X should be 7.0");
-        assertEquals(allPoints[2].y(),3.0,"p3 Y should be 6.0");
-
-        t1.scale(center,-1);   // Scaled the Triangle by -1 to return to the original size
-        t1.scale(center,-1);
-        assertTrue(t1.equals(originT1),"the size should go back to the original size of t1");
+        Triangle_2D originT1 = (Triangle_2D)t1.copy();
 
         t1.scale(center,1);  // Scaled the rectangle by 1, the rectangle need to stay in the same size
-        assertTrue(t1.equals(originT1),"the size shouldn't change");
+        assertTrue(t1.equals(originT1),"the triangle should be equal (test 1)");
+
+
+        t1.scale(center,2); // Scaled the Triangle by 2;
+        Point_2D expectedP1 = new Point_2D(1,7);
+        Point_2D expectedP2 = new Point_2D(1,3);
+        Point_2D expectedP3 = new Point_2D(9,3);
+        Triangle_2D expectedT1 = new Triangle_2D(expectedP1, expectedP2, expectedP3);
+        assertTrue(t1.equals(expectedT1),"the triangle should be equal (test 2)");
     }
 
     @Test
@@ -104,22 +108,22 @@ class Triangle_2DTest {
         t1.rotate(center,90);
 
         Point_2D expectedP1 = new Point_2D(3,-1);
-        assertTrue(allPoints[0].close2equals(expectedP1, Ex2_Const.EPS));
+        assertTrue(allPoints[0].close2equals(expectedP1, Ex2_Const.EPS),"the points should be equal (p1) ");
 
         Point_2D expectedP2 = new Point_2D(5,-1);
-        assertTrue(allPoints[1].close2equals(expectedP2,Ex2_Const.EPS));
+        assertTrue(allPoints[1].close2equals(expectedP2,Ex2_Const.EPS),"the points should be equal (p2) ");
 
         Point_2D expectedP3 = new Point_2D(5,3);
-        assertTrue(allPoints[2].close2equals(expectedP3,Ex2_Const.EPS));
+        assertTrue(allPoints[2].close2equals(expectedP3,Ex2_Const.EPS),"the points should be equal (p3) ");
     }
 
     @Test
-    void testToString() {
-        assertEquals(t1.toString(),1.0+","+5.0+","+1.0+","+3.0+","+5.0+","+3.0);
+    void ToString() {
+        assertEquals(t1.toString(),1.0+","+5.0+","+1.0+","+3.0+","+5.0+","+3.0,"The Strings should be equal");
     }
 
     @Test
-    void testEquals() {
+    void equals() {
         Triangle_2D t1 = new Triangle_2D(p1,p2,p3);
         Triangle_2D t2 = new Triangle_2D(p1,p2,p3);
         Triangle_2D t3 = new Triangle_2D(p2,p3,p1);

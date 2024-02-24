@@ -16,11 +16,7 @@ import java.util.Collections;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShapeCollectionTest {
-    private Point_2D p1;
-    private Point_2D p2;
-    private Point_2D p3;
-    private Point_2D p4;
-    private Point_2D p5;
+    private Point_2D p1, p2, p3, p4, p5;
     private Polygon_2D v1; private GUIShape gs1;
     private Circle_2D c1; private GUIShape gs2;
     private Rect_2D r1; private GUIShape gs3;
@@ -28,7 +24,7 @@ class ShapeCollectionTest {
     private Segment_2D s1; private GUIShape gs5;
     private ShapeCollection collection1;
 
-    @BeforeEach
+    @BeforeEach // set a shape collection for tests before each test
     void setUp(){
         p1 = new Point_2D(1, 2);
         p2 = new Point_2D(3, 5);
@@ -43,80 +39,84 @@ class ShapeCollectionTest {
         c1 = new Circle_2D(p1,3);
         gs2 = new GUIShape(c1, false, Color.black, 2);
 
-        r1=new Rect_2D(p1,p2);
+        r1 = new Rect_2D(p1,p2);
         gs3 = new GUIShape(r1, true, Color.white, 3);
 
-        t1=new Triangle_2D(p1,p2,p3);
+        t1 = new Triangle_2D(p1,p2,p3);
         gs4 = new GUIShape(t1, false, Color.yellow, 4);
 
-        s1=new Segment_2D(p1,p2);
+        s1 = new Segment_2D(p1,p2);
         gs5 = new GUIShape(s1, true, Color.green, 5);
 
-        collection1=new ShapeCollection();
+        collection1 = new ShapeCollection();
         collection1.add(gs1); collection1.add(gs2); collection1.add(gs3); collection1.add(gs4); collection1.add(gs5);
+    }
+
+    @Test
+    void equals(){
+        ShapeCollection copiedCollection1 = (ShapeCollection) collection1.copy();
+        assertTrue(collection1.equals(copiedCollection1),"The collection should be equal");
+
+        copiedCollection1.removeAll();
+        assertFalse(collection1.equals(copiedCollection1),"The collection shouldn't be equal");
     }
 
     @Test
     void get() {
         GUIShape actual = (GUIShape) collection1.get(2);
         GUI_Shape excepted = gs3;
-        assertEquals(excepted.getTag(),actual.getTag());
-        assertEquals(excepted.getShape(),actual.getShape());
-        assertEquals(excepted.isFilled(),actual.isFilled());
-        assertEquals(excepted.isSelected(),actual.isSelected());
+        assertEquals(excepted.getTag(),actual.getTag(),"The tags should be equal");
+        assertEquals(excepted.getShape(),actual.getShape(),"The shapes should be equal");
+        assertEquals(excepted.getColor(),actual.getColor(),"The color should be equal");
+        assertTrue(actual.isFilled(),"isFilled should be true");
+        assertFalse(actual.isSelected(),"isSelected should be true");
     }
 
     @Test
-    void size() {assertEquals(collection1.size(),5);}
+    void size() {assertEquals(5,collection1.size(),"the size should be 5");}
 
     @Test
     void removeElementAt() {
         collection1.removeElementAt(0);
-        assertNotEquals(collection1.get(0).toString(),gs1.toString());
+        assertNotEquals(collection1.get(0).toString(),gs1.toString(),"The Strings shouldn't be equal");
 
-        assertEquals(collection1.get(0).getTag(),gs2.getTag());
-        assertEquals(collection1.get(0).getShape(),gs2.getShape());
-        assertEquals(collection1.get(0).getColor(),gs2.getColor());
-        assertEquals(collection1.get(0).isSelected(),gs2.isSelected());
-        assertEquals(collection1.get(0).isFilled(),gs2.isFilled());
+        assertEquals(collection1.get(0).getTag(),gs2.getTag(),"The tags should be equal");
+        assertEquals(collection1.get(0).getShape(),gs2.getShape(),"The shapes should be equal");
+        assertEquals(collection1.get(0).getColor(),gs2.getColor(),"The color should be equal");
+        assertFalse(collection1.get(0).isSelected(),"isFilled should be false");
+        assertFalse(collection1.get(0).isFilled(),"isSelected should be false");
     }
 
     @Test
     void addAt() {
         collection1.addAt(gs1,2);
-        assertEquals(collection1.get(2).getTag(),gs1.getTag());
-        assertEquals(collection1.get(2).getShape(),gs1.getShape());
-        assertEquals(collection1.get(2).getColor(),gs1.getColor());
-        assertEquals(collection1.get(2).isSelected(),gs1.isSelected());
-        assertEquals(collection1.get(2).isFilled(),gs1.isFilled());
+        assertEquals(collection1.get(2).getTag(),gs1.getTag(),"The tags should be equal");
+        assertEquals(collection1.get(2).getShape(),gs1.getShape(),"The shapes should be equal");
+        assertEquals(collection1.get(2).getColor(),gs1.getColor(),"The colors should be equal");
+        assertFalse(collection1.get(2).isSelected(),"isFilled should be false");
+        assertTrue(collection1.get(2).isFilled(),"isSelected should be true");
 
-        assertEquals(collection1.get(3).getTag(),gs3.getTag());
-        assertEquals(collection1.get(3).getShape(),gs3.getShape());
-        assertEquals(collection1.get(3).getColor(),gs3.getColor());
-        assertEquals(collection1.get(3).isSelected(),gs3.isSelected());
-        assertEquals(collection1.get(3).isFilled(),gs3.isFilled());
+        assertEquals(collection1.get(3).getTag(),gs3.getTag(),"The tags should be equal");
+        assertEquals(collection1.get(3).getShape(),gs3.getShape(),"The shapes should be equal");
+        assertEquals(collection1.get(3).getColor(),gs3.getColor(),"The colors should be equal");
+        assertFalse(collection1.get(3).isSelected(),"isFilled should be false");
+        assertTrue(collection1.get(3).isFilled(),"isSelected should be true");
     }
 
     @Test
     void add() {
         collection1.add(gs1);
-        assertEquals(collection1.get(5).getTag(),gs1.getTag());
-        assertEquals(collection1.get(5).getShape(),gs1.getShape());
-        assertEquals(collection1.get(5).getColor(),gs1.getColor());
-        assertEquals(collection1.get(5).isSelected(),gs1.isSelected());
-        assertEquals(collection1.get(5).isFilled(),gs1.isFilled());
+        assertEquals(collection1.get(5).getTag(),gs1.getTag(),"The tags should be equal");
+        assertEquals(collection1.get(5).getShape(),gs1.getShape(),"The shapes should be equal");
+        assertEquals(collection1.get(5).getColor(),gs1.getColor(),"The colors should be equal");
+        assertFalse(collection1.get(5).isSelected(),"isFilled should be false");
+        assertTrue(collection1.get(5).isFilled(),"isSelected should be true");
     }
 
     @Test
     void copy() {
         ShapeCollection copiedCollection1 = (ShapeCollection) collection1.copy();
-        for (int i = 0; i < collection1.size(); i++) {
-            assertEquals(collection1.get(i).getTag(),copiedCollection1.get(i).getTag());
-            assertEquals(collection1.get(i).getShape(),copiedCollection1.get(i).getShape());
-            assertEquals(collection1.get(i).getColor(),copiedCollection1.get(i).getColor());
-            assertEquals(collection1.get(i).isSelected(),copiedCollection1.get(i).isSelected());
-            assertEquals(collection1.get(i).isFilled(),copiedCollection1.get(i).isFilled());
-        }
+        assertTrue(collection1.equals(copiedCollection1),"The collections should be equal");
     }
 
     @Test
@@ -124,48 +124,48 @@ class ShapeCollectionTest {
         ShapeComp comp = new ShapeComp(0); // Sort by Tag
         collection1.sort(comp);
         for (int i = 0; i < collection1.size()-1; i++)
-            assertTrue(collection1.get(i).getTag()<collection1.get(i+1).getTag());
+            assertTrue(collection1.get(i).getTag()<collection1.get(i+1).getTag(),"The sort should be by tag");
 
-        ShapeComp comp2 = new ShapeComp(1); // Sort by Anti-Tag
+        ShapeComp comp2 = new ShapeComp(1); // Sort by anti-Tag
         collection1.sort(comp2);
         for (int i = 0; i < collection1.size()-1; i++)
-            assertTrue(collection1.get(i).getTag()>collection1.get(i+1).getTag());
+            assertTrue(collection1.get(i).getTag()>collection1.get(i+1).getTag(),"The sort should be by anti tag");
 
         ShapeComp comp3 = new ShapeComp(2); // Sort by area
         collection1.sort(comp3);
         for (int i = 0; i < collection1.size()-1; i++)
-            assertTrue(collection1.get(i).getShape().area()<collection1.get(i+1).getShape().area());
+            assertTrue(collection1.get(i).getShape().area()<collection1.get(i+1).getShape().area(),"The sort should be by area");
 
         ShapeComp comp4 = new ShapeComp(3); // Sort by anti-area
         collection1.sort(comp4);
         for (int i = 0; i < collection1.size()-1; i++)
-            assertTrue(collection1.get(i).getShape().area()>collection1.get(i+1).getShape().area());
+            assertTrue(collection1.get(i).getShape().area()>collection1.get(i+1).getShape().area(),"The sort should be by anti-area");
 
         ShapeComp comp5 = new ShapeComp(4); // Sort by perimeter
         collection1.sort(comp5);
         for (int i = 0; i < collection1.size()-1; i++)
-            assertTrue(collection1.get(i).getShape().perimeter()<collection1.get(i+1).getShape().perimeter());
+            assertTrue(collection1.get(i).getShape().perimeter()<collection1.get(i+1).getShape().perimeter(),"The sort should be by perimeter");
 
         ShapeComp comp6 = new ShapeComp(5); // Sort by anti-perimeter
         collection1.sort(comp6);
         for (int i = 0; i < collection1.size()-1; i++)
-            assertTrue(collection1.get(i).getShape().perimeter()>collection1.get(i+1).getShape().perimeter());
+            assertTrue(collection1.get(i).getShape().perimeter()>collection1.get(i+1).getShape().perimeter(),"The sort should be by anti-perimeter");
 
         ShapeComp comp7 = new ShapeComp(6); // Sort by toString
         collection1.sort(comp7);
         for (int i = 0; i < collection1.size()-1; i++)
-            assertTrue(collection1.get(i).toString().compareTo(collection1.get(i+1).toString())<=0);
+            assertTrue(collection1.get(i).toString().compareTo(collection1.get(i+1).toString())<=0,"The sort should be by toString");
 
         ShapeComp comp8 = new ShapeComp(7); // Sort by anti-toString
         collection1.sort(comp8);
         for (int i = 0; i < collection1.size()-1; i++)
-            assertTrue(collection1.get(i).toString().compareTo(collection1.get(i+1).toString())>=0);
+            assertTrue(collection1.get(i).toString().compareTo(collection1.get(i+1).toString())>=0,"The sort should be by anti-toString");
     }
 
     @Test
     void removeAll() {
         collection1.removeAll();
-        assertEquals(collection1.size(),0);
+        assertEquals(collection1.size(),0,"The collection should be empty");
     }
 
     @Test
@@ -178,7 +178,7 @@ class ShapeCollectionTest {
             String actualContent = Files.readString(Paths.get(fileName + ".txt"));
             String expectedContent = "GUIShape,-16776961,true,1,Polygon_2D,1.0,2.0, 3.0,5.0, 9.0,1.0, 4.0,1.0, 1.0,0.0, \n" +
                     "GUIShape,-16777216,false,2,Circle_2D,1.0,2.0, 3.0";
-            assertEquals(actualContent,expectedContent);
+            assertEquals(actualContent,expectedContent,"The Strings should be equal");
         } catch (Exception e) {
             System.err.println("the file is not valid");
         }
@@ -186,7 +186,7 @@ class ShapeCollectionTest {
 
     @Test
     void load() throws Exception{
-        ShapeCollection collection2 = new ShapeCollection(); //didnt finished yet
+        ShapeCollection collection2 = new ShapeCollection();
         String expectedContent = "GUIShape,-16776961,true,1,Polygon_2D,1.0,2.0, 3.0,5.0, 9.0,1.0, 4.0,1.0, 1.0,0.0, \n" +
                 "GUIShape,-16777216,false,2,Circle_2D,1.0,2.0, 3.0";
         String fileName = "test_file";
@@ -194,15 +194,15 @@ class ShapeCollectionTest {
 
         Files.writeString(path1,expectedContent);
         collection2.load(path1.toString());
-        assertEquals(collection2.size(),2);
+        assertEquals(collection2.size(),2,"The collections should be the same length");
     }
 
     @Test
-    void testToString() {
+    void ToString() {
         ShapeCollection collection2 = new ShapeCollection();
         collection2.add(gs1); collection2.add(gs2);
         String actual = collection2.toString();
         String expected = "GUIShape,-16776961,true,1,Polygon_2D,[1.0,2.0, 3.0,5.0, 9.0,1.0, 4.0,1.0, 1.0,0.0]GUIShape,-16777216,false,2,Circle_2D,1.0,2.0, 3.0";
-        assertEquals(actual,expected);
+        assertEquals(actual,expected,"The Strings should be equal");
     }
 }

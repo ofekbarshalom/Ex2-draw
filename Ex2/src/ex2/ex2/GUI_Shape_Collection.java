@@ -23,7 +23,7 @@ public interface GUI_Shape_Collection {
 	public GUI_Shape get(int i);
 	/**
 	 * return the size of the collection (if empty return 0).
-	 * @return
+	 * @return GUI_Shape in index i
 	 */
 	public int size();
 	/**
@@ -49,8 +49,7 @@ public interface GUI_Shape_Collection {
 	public void addAt(GUI_Shape s, int i);
 	/**
 	 * This method constructs a deep copy of this collection.
-	 * Note: the two collections are equal - yet they have no shared memory. 
-	 * @return
+	 * Note: the two collections are equal - yet they have no shared memory.
 	 */
 	public GUI_Shape_Collection copy();
 	/** This method sorts this gui_shape collection according to the comp Comparator - in increasing order.

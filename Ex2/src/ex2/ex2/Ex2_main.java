@@ -7,19 +7,16 @@ import ex2.gui.GUI_Shape;
 
 import java.awt.*;
 
-/**
+/** Ex2_main:
  * This class is a very simple main for starting with Ex2
- * You may update this file, but do noteL your Ex2 will be run using our own "main" class
- * Make sure you test the loadDemo(); function once you have implemented it (do test the "save" as well)
  */
 public class Ex2_main {
 
 	public static void main(String[] args) {
 		simpleShapes();
-		loadDemo();
+		//loadDemo();
 	}
 
-	// Two simple GeoShapes
 	public static void simpleShapes() {
 		Ex2 ex2 = Ex2.getInstance();
 		GUI_Shape_Collection shapes = ex2.getShape_Collection();

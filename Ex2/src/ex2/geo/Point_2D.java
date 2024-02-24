@@ -8,7 +8,7 @@ package ex2.geo;
  */
 
 public class Point_2D {
-    //public static final double EPS1 = 0.001, EPS2 = Math.pow(EPS1,2), EPS=EPS2;
+    // public static final double EPS1 = 0.001, EPS2 = Math.pow(EPS1,2), EPS=EPS2;
     public static final Point_2D ORIGIN = new Point_2D(0,0);
     private double _x,_y;
     public Point_2D(double x, double y) {
@@ -30,13 +30,6 @@ public class Point_2D {
     }
     public double x() {return _x;}
     public double y() {return _y;}
-    public void set_x(double _x) {
-        this._x = _x;
-    }
-
-    public void set_y(double _y) {
-        this._y = _y;
-    }
     public int ix() {return (int)_x;}
     public int iy() {return (int)_y;}
   
