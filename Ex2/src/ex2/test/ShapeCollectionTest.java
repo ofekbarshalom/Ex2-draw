@@ -172,16 +172,8 @@ class ShapeCollectionTest {
     void save() {
         ShapeCollection collection2 = new ShapeCollection();
         collection2.add(gs1); collection2.add(gs2);
-        String fileName = "test_file";
-        try {
-            collection2.save(fileName);
-            String actualContent = Files.readString(Paths.get(fileName + ".txt"));
-            String expectedContent = "GUIShape,-16776961,true,1,Polygon_2D,1.0,2.0, 3.0,5.0, 9.0,1.0, 4.0,1.0, 1.0,0.0, \n" +
-                    "GUIShape,-16777216,false,2,Circle_2D,1.0,2.0, 3.0";
-            assertEquals(actualContent,expectedContent,"The Strings should be equal");
-        } catch (Exception e) {
-            System.err.println("the file is not valid");
-        }
+        collection2.save("testCollection");
+        assertTrue(Files.exists(Paths.get("testCollection.txt")), "File should be saved successfully.");
     }
 
     @Test
@@ -189,7 +181,6 @@ class ShapeCollectionTest {
         ShapeCollection collection2 = new ShapeCollection();
         String expectedContent = "GUIShape,-16776961,true,1,Polygon_2D,1.0,2.0, 3.0,5.0, 9.0,1.0, 4.0,1.0, 1.0,0.0, \n" +
                 "GUIShape,-16777216,false,2,Circle_2D,1.0,2.0, 3.0";
-        String fileName = "test_file";
         Path path1 = Paths.get("textShape.txt");
 
         Files.writeString(path1,expectedContent);

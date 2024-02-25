@@ -115,13 +115,14 @@ public class ShapeCollection implements GUI_Shape_Collection {
 	 */
 	@Override
 	public void save(String file_name) {
-		String content = this._shapes.toString(); // Convert shapes to a String representation
-		content = content.replace("[","").replace("]",""); // Remove the brackets surrounding the content
-		// Inserts a newline before each "GUIShape" in the content, except for the first "GUIShape" at the beginning of the content.
-		content = content.replaceAll("(?<!^)(GUIShape)", "\n$1");
 		String path = file_name + ".txt";
+		ArrayList<String> lines = new ArrayList<>();  // Crate an array of lines, Each line represent a GUI_Shape
+		for (int i = 0; i < this._shapes.size(); i++) { // loop over all the shapes in shape collection
+			String shape = this._shapes.get(i).toString(); // Crate a String representation of the shape using toString
+			lines.add(shape); // add the shape as a string to the line array
+		}
 		try {
-			Files.writeString(Paths.get(path),content); // Writes "content" to a File and saving it
+			Files.write(Paths.get(path),lines); // Writes "lines" to a File and saving it
 			System.out.println("File saved successfully.");
 		} catch (Exception e) {
 			System.err.println("Error writing to file: " + e.getMessage());

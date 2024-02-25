@@ -132,8 +132,7 @@ class Rect_2DTest {
 
     @Test
     void ToString() {
-
-        assertEquals(r1.toString(),1.0+","+5.0+","+3.0+","+2.0+","+1.0+","+2.0+","+3.0+","+5.0,"The Strings should be equal");
+        assertEquals(1.0+ "," +5.0+ "," +1.0+ "," +2.0+ "," +3.0+ "," +2.0+ "," +3.0+ "," +5.0, r1.toString(),"The Strings should be equal");
     }
 
     @Test

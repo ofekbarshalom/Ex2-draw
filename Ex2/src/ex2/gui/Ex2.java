@@ -146,8 +146,8 @@ public class Ex2 implements Ex2_GUI {
             ps = ((Triangle_2D) gs).getAllPoints();
         }
         if(gs instanceof Rect_2D){
-            Rect_2D r= (Rect_2D) gs;
-            ps=new Point_2D[]{r.get_p1(),r.get_p3(),r.get_p2(),r.get_p4()};
+            Rect_2D r = (Rect_2D) gs;
+            ps = new Point_2D[]{r.get_p1(),r.get_p3(),r.get_p2(),r.get_p4()};
         }
         if (ps != null) {
             double[] xx = new double[ps.length];

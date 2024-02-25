@@ -48,18 +48,18 @@ public class GUIShape implements GUI_Shape{
 		if("Rect_2D".equals(quality[4])) {  // Checks if the GUIShape is a rectangle
 			double x1 = Double.parseDouble(quality[5]);
 			double y1 = Double.parseDouble(quality[6]);
-			double x2 = Double.parseDouble(quality[7]);
-			double y2 = Double.parseDouble(quality[8]);
-			double x3 = Double.parseDouble(quality[9]);
-			double y3 = Double.parseDouble(quality[10]);
+			double x3 = Double.parseDouble(quality[7]);
+			double y3 = Double.parseDouble(quality[8]);
+			double x2 = Double.parseDouble(quality[9]);
+			double y2 = Double.parseDouble(quality[10]);
 			double x4 = Double.parseDouble(quality[11]);
 			double y4 = Double.parseDouble(quality[12]);
 			Point_2D p1 = new Point_2D(x1,y1);
 			Point_2D p2 = new Point_2D(x2,y2);
-			Point_2D p3 = new Point_2D(x3, y3);
-			Point_2D p4 = new Point_2D(x4, y4);
-			Rect_2D r=new Rect_2D(p1,p2,p3,p4);
-			boolean isFilled = Boolean.parseBoolean(quality[2]);
+			Point_2D p3 = new Point_2D(x3,y3);
+			Point_2D p4 = new Point_2D(x4,y4);
+			Rect_2D r = new Rect_2D(p1, p2, p3, p4);
+            boolean isFilled = Boolean.parseBoolean(quality[2]);
 			Color color = Color.decode(quality[1]);
 			int tag = Integer.parseInt(quality[3]);
 			// Constructs a new GUIShape object based on the quality's of the String array.

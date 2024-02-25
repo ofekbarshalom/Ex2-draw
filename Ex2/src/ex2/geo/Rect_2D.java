@@ -12,11 +12,11 @@ public class Rect_2D implements GeoShape {
 	 * @param p1 a corner of the rectangle (Point_2D object)
 	 * @param p2 a corner of the rectangle in a opposite direction of p1
 	 */
-	public Rect_2D(Point_2D p1, Point_2D p2) {
-		this.p1= new Point_2D(p1);
-		this.p2= new Point_2D(p2);
-		this.p3=new Point_2D(p1.x(),p2.y());
-		this.p4=new Point_2D(p2.x(),p1.y());
+	 public Rect_2D(Point_2D p1, Point_2D p2) {
+		this.p1 = new Point_2D(p1);
+		this.p2 = new Point_2D(p2);
+		this.p3 = new Point_2D(p1.x(),p2.y());
+		this.p4 = new Point_2D(p2.x(),p1.y());
 	}
 
 	/**
@@ -27,10 +27,10 @@ public class Rect_2D implements GeoShape {
 	 * @param p4 a corner in the rectangle
 	 */
 	public Rect_2D(Point_2D p1, Point_2D p2, Point_2D p3, Point_2D p4) {
-		this.p1 = new Point_2D(p1);
-		this.p2 = new Point_2D(p2);
-		this.p3 = new Point_2D(p3);
-		this.p4 = new Point_2D(p4);
+			this.p1 = new Point_2D(p1);
+			this.p2 = new Point_2D(p2);
+			this.p3 = new Point_2D(p3);
+			this.p4 = new Point_2D(p4);
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class Rect_2D implements GeoShape {
 	 * @param r1 The Rect_2D object to be copied.
 	 */
 	public Rect_2D(Rect_2D r1) {
-		this(r1.get_p1(),r1.get_p2());
+		this(r1.p1, r1.p2);
 	}
 
 	 /** get_p1:
@@ -150,6 +150,7 @@ public class Rect_2D implements GeoShape {
 	 */
 	@Override
 	public void rotate(Point_2D center, double angleDegrees) {
+		if (angleDegrees == 0) {return;}
 		this.p1.rotate(center,angleDegrees);
 		this.p2.rotate(center,angleDegrees);
 		this.p3.rotate(center,angleDegrees);
@@ -161,7 +162,7 @@ public class Rect_2D implements GeoShape {
 	 */
 	@Override
 	public String toString() {
-		return p1.toString()+","+p2.toString()+","+p3.toString()+","+p4.toString();
+		return p1.toString()+","+p3.toString()+","+p2.toString()+","+p4.toString();
 	}
 
 	/** equals:
